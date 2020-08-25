@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta content="charset=UTF-8">
+
+    <title>Just For JunJun!</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <style>
+
+        html {
+
+            height: 100%;
+
+        }
+
+
+        body {
+
+            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+
+            background: #79a8ae;
+
+            color: #CFEBE4;
+
+            font-size: 18px;
+
+            line-height: 2;
+
+            letter-spacing: 1.2px;
+
+            margin: 0;
+
+        }
+
+
+        a {
+
+            color: #ebf7f4;
+
+        }
+
+
+        .body--ready {
+
+            background: -webkit-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+
+            background: -moz-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+
+            background: -o-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+
+            background: -ms-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+
+            background: linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+
+        }
+
+
+        .text {
+
+            position: fixed;
+
+            bottom: 100px;
+
+            text-align: center;
+
+            width: 100%;
+
+        }
+
+
+        #canvas {
+			
+            margin: 0 auto;
+
+            display: block;
+
+        }
+
+
+        img#logo {
+
+            width: 168px;
+
+            background-size: cover;
+
+            border-radius: 200px;
+
+            box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
+
+            border: 3px solid #00a0ff;
+
+            opacity: 1;
+
+            margin: 0 auto;
+
+            margin-top: 20px;
+
+            margin-bottom: 20px;
+
+            transition: all 1.0s;
+
+        }
+
+
+        #logo:hover {
+
+            box-shadow: 0 0 10px #fff;
+
+            -webkit-box-shadow: 0 0 19px #fff;
+
+            transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg); /* IE 9 */
+
+            -moz-transform: rotate(360deg); /* Firefox */
+
+            -webkit-transform: rotate(360deg); /* Safari ?? Chrome */
+
+            -o-transform: rotate(360deg); /* Opera */
+
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+        }
+
+
+        .cs {
+
+            width: 100%;
+
+            height: 100%;
+
+            margin: 0 auto;
+
+            position: absolute;
+
+            text-align: center;
+
+        }
+
+
+        .text1 {
+
+            position: fixed;
+
+            bottom: 80px;
+
+            text-align: center;
+
+            width: 100%;
+
+            font-weight: bold;
+
+        }
+
+
+        .text-right {
+
+            position: fixed;
+
+            bottom: 50px;
+
+            text-align: right;
+
+            width: 100%;
+
+            font-weight: bold;
+
+        }
+
+        #theSvg {
+            width: 110vmin;
+            display:block;
+            position:absolute;
+            margin:auto;
+            top:0;bottom:0;left:0;right:0;
+            z-index:1;
+        }
+
+        text {
+            fill: red;
+            font-family: consolas;
+            font-size: 9px;
+        }
+
+        p{position:absolute;z-index:2}
+
+        label{-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;opacity:.8}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="cs">
+    <img src="https://isstevenshi.github.io/junjun.jpg" id="logo">
+</div>
+
+<audio autoplay="autoplay" loop="loop">
+    <!- <source src="https://isstevenshi.github.io/Perfect-clip.mp3" type="audio/mpeg"> ->
+	<source src="http://122.51.217.39:8888/group1/M00/00/00/rBEAB19EqA-AXGFGACLGA2IhS2g496.mp3" type="audio/mpeg">
+</audio>
+
+<canvas width="1500" height="700" id="canvas"></canvas>
+
+<p class="text1" style="color: #FFFFCC;">
+    We already know
+    <br/>
+    <span id="span_dt_dt"></span>
+</p>
+
+<svg id="theSvg" viewBox="-120 -30 240 180" xml:space="preserve">
+	<defs>
+		<filter id="f" filterUnits="userSpaceOnUse" x="-120" y="-30" width="120%" height="120%">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
+			<feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
+			<feFlood flood-color="rgba(255,0,0,.9)" result="color"></feFlood>
+			<feComposite in="color" in2="shadow" operator="in"></feComposite>
+			<feComposite in="SourceGraphic"></feComposite>
+		</filter>
+		<path id="shape" d="M0, 21.054
+			C0, 21.054 24.618, -15.165 60.750, 8.554
+			C93.249, 29.888 57.749, 96.888 0, 117.388
+			C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+			C-24.618, -15.165  -0, 21.054 -0, 21.054z ">
+		</path>
+		<path id="partialPath" d="M0, 21.054
+			C0, 21.054 24.618, -15.165 60.750, 8.554
+			C93.249, 29.888 57.749, 96.888 0, 117.388
+			C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+			-24.618000000002304,-15.164999999998484  -3.147704319417244e-12,21.053999999995362  -3.0171089725444906e-25,21.054 ">
+		</path>
+	</defs>
+
+	<text dy="-2" filter="url(#f)">
+		<textPath xlink:href="#partialPath" startOffset="12"></textPath>
+	</text>
+</svg>
+
+<script language="javascript">
+
+    function show_date_time() {
+
+        window.setTimeout("show_date_time()", 1000);
+
+        BirthDay = new Date("2020/07/27 22:31:00");
+
+        today = new Date();
+
+        timeold = (today.getTime() - BirthDay.getTime());
+
+        sectimeold = timeold / 1000;
+
+        secondsold = Math.floor(sectimeold);
+
+        msPerDay = 24 * 60 * 60 * 1000;
+
+        e_daysold = timeold / msPerDay;
+
+        daysold = Math.floor(e_daysold);
+
+        e_hrsold = (e_daysold - daysold) * 24;
+
+        hrsold = Math.floor(e_hrsold);
+
+        e_minsold = (e_hrsold - hrsold) * 60;
+
+        minsold = Math.floor((e_hrsold - hrsold) * 60);
+
+        seconds = Math.floor((e_minsold - minsold) * 60);
+
+        span_dt_dt.innerHTML = daysold + "天" + hrsold + "时" + minsold + "分" + seconds + "秒";
+
+    }
+
+    show_date_time();
+
+</script>
+
+<script>
+
+    var S = {
+
+        init: function () {
+
+            S.Drawing.init('#canvas');
+
+            document.body.classList.add('body--ready');
+
+            S.UI.simulate("JunJun|happy|Qixi Festival!|and|happy|everyday!|#smail|#blank");
+			
+            S.Drawing.loop(function () {
+
+                S.Shape.render();
+
+            });
+
+        }
+
+    };
+
+
+    S.Drawing = (function () {
+
+        var canvas,
+
+            context,
+
+            renderFn,
+
+            requestFrame = window.requestAnimationFrame ||
+
+                window.webkitRequestAnimationFrame ||
+
+                window.mozRequestAnimationFrame ||
+
+                window.oRequestAnimationFrame ||
+
+                window.msRequestAnimationFrame ||
+
+                function (callback) {
+
+                    window.setTimeout(callback, 1000 / 60);
+
+                };
+
+
+        return {
+
+            init: function (el) {
+
+                canvas = document.querySelector(el);
+
+                context = canvas.getContext('2d');
+
+                this.adjustCanvas();
+
+
+                window.addEventListener('resize', function (e) {
+
+                    S.Drawing.adjustCanvas();
+
+                });
+
+            },
+
+            loop: function (fn) {
+
+                renderFn = !renderFn ? fn : renderFn;
+
+                this.clearFrame();
+
+                renderFn();
+
+                requestFrame.call(window, this.loop.bind(this));
+
+            },
+
+            adjustCanvas: function () {
+
+                canvas.width = window.innerWidth - 100;
+
+                canvas.height = window.innerHeight - 30;
+
+            },
+
+            clearFrame: function () {
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+            },
+
+            getArea: function () {
+
+                return {w: canvas.width, h: canvas.height};
+
+            },
+
+            drawCircle: function (p, c) {
+
+                context.fillStyle = c.render();
+
+                context.beginPath();
+
+                context.arc(p.x, p.y, p.z, 0, 2 * Math.PI, true);
+
+                context.closePath();
+
+                context.fill();
+
+            }
+
+        };
+
+    }());
+
+
+    S.UI = (function () {
+
+        var interval,
+
+            currentAction,
+
+            time,
+
+            maxShapeSize = 30,
+
+            sequence = [],
+
+            cmd = '#';
+
+
+        function formatTime(date) {
+
+            var h = date.getHours(),
+
+                m = date.getMinutes(),
+
+                m = m < 10 ? '0' + m : m;
+
+            return h + ':' + m;
+
+        }
+
+
+        function getValue(value) {
+
+            return value && value.split(' ')[1];
+
+        }
+
+
+        function getAction(value) {
+
+            value = value && value.split(' ')[0];
+
+            return value && value[0] === cmd && value.substring(1);
+
+        }
+
+
+        function timedAction(fn, delay, max, reverse) {
+
+            clearInterval(interval);
+
+            currentAction = reverse ? max : 1;
+
+            fn(currentAction);
+
+
+            if (!max || (!reverse && currentAction < max) || (reverse && currentAction > 0)) {
+
+                interval = setInterval(function () {
+
+                    currentAction = reverse ? currentAction - 1 : currentAction + 1;
+
+                    fn(currentAction);
+
+
+                    if ((!reverse && max && currentAction === max) || (reverse && currentAction === 0)) {
+
+                        clearInterval(interval);
+
+                    }
+
+                }, delay);
+
+            }
+
+        }
+
+
+        function performAction(value) {
+
+            var action,
+
+                value,
+
+                current;
+
+
+            sequence = typeof (value) === 'object' ? value : sequence.concat(value.split('|'));
+
+
+            timedAction(function (index) {
+
+                current = sequence.shift();
+
+                action = getAction(current);
+
+                value = getValue(current);
+
+                switch (action) {
+
+                    case 'smail':
+                    
+						S.Shape.switchShape(S.ShapeBuilder.letter(current[0] === cmd ? '(*^▽^*)' : current));
+
+                        break;
+
+
+                    case 'rectangle':
+
+                        value = value && value.split('x');
+
+                        value = (value && value.length === 2) ? value : [maxShapeSize, maxShapeSize / 2];
+
+
+                        S.Shape.switchShape(S.ShapeBuilder.rectangle(Math.min(maxShapeSize, parseInt(value[0])), Math.min(maxShapeSize, parseInt(value[1]))));
+
+                        break;
+
+
+                    case 'circle':
+
+                        value = parseInt(value) || maxShapeSize;
+
+                        value = Math.min(value, maxShapeSize);
+
+                        S.Shape.switchShape(S.ShapeBuilder.circle(value));
+
+                        break;
+
+                    default:
+						
+						S.Shape.switchShape(S.ShapeBuilder.letter(current[0] === cmd ? '' : current));                    
+
+                }
+
+            }, 2000, sequence.length);
+
+        }
+
+
+        return {
+
+            simulate: function (action) {
+
+                performAction(action);
+
+            }
+
+        };
+
+    }());
+
+
+    S.Point = function (args) {
+
+        this.x = args.x;
+
+        this.y = args.y;
+
+        this.z = args.z;
+
+        this.a = args.a;
+
+        this.h = args.h;
+
+    };
+
+
+    S.Color = function (r, g, b, a) {
+
+        this.r = r;
+
+        this.g = g;
+
+        this.b = b;
+
+        this.a = a;
+
+    };
+
+
+    S.Color.prototype = {
+
+        render: function () {
+
+            return 'rgba(' + this.r + ',' + +this.g + ',' + this.b + ',' + this.a + ')';
+
+        }
+
+    };
+
+
+    S.Dot = function (x, y) {
+
+        this.p = new S.Point({
+
+            x: x,
+
+            y: y,
+
+            z: 5,
+
+            a: 1,
+
+            h: 0
+
+        });
+
+
+        this.e = 0.07;
+
+        this.s = true;
+
+
+        this.c = new S.Color(255, 102, 153, this.p.a);
+
+
+        this.t = this.clone();
+
+        this.q = [];
+
+    };
+
+
+    S.Dot.prototype = {
+
+        clone: function () {
+
+            return new S.Point({
+
+                x: this.x,
+
+                y: this.y,
+
+                z: this.z,
+
+                a: this.a,
+
+                h: this.h
+
+            });
+
+        },
+
+        _draw: function () {
+
+            this.c.a = this.p.a;
+
+            S.Drawing.drawCircle(this.p, this.c);
+
+        },
+
+        _moveTowards: function (n) {
+
+            var details = this.distanceTo(n, true),
+
+                dx = details[0],
+
+                dy = details[1],
+
+                d = details[2],
+
+                e = this.e * d;
+
+
+            if (this.p.h === -1) {
+
+                this.p.x = n.x;
+
+                this.p.y = n.y;
+
+                return true;
+
+            }
+
+
+            if (d > 1) {
+
+                this.p.x -= ((dx / d) * e);
+
+                this.p.y -= ((dy / d) * e);
+
+            } else {
+
+                if (this.p.h > 0) {
+
+                    this.p.h--;
+
+                } else {
+
+                    return true;
+
+                }
+
+            }
+
+
+            return false;
+
+        },
+
+        _update: function () {
+
+            if (this._moveTowards(this.t)) {
+
+                var p = this.q.shift();
+
+
+                if (p) {
+
+                    this.t.x = p.x || this.p.x;
+
+                    this.t.y = p.y || this.p.y;
+
+                    this.t.z = p.z || this.p.z;
+
+                    this.t.a = p.a || this.p.a;
+
+                    this.p.h = p.h || 0;
+
+                } else {
+
+                    if (this.s) {
+
+                        this.p.x -= Math.sin(Math.random() * 3.142);
+
+                        this.p.y -= Math.sin(Math.random() * 3.142);
+
+                    } else {
+
+                        this.move(new S.Point({
+
+                            x: this.p.x + (Math.random() * 50) - 25,
+
+                            y: this.p.y + (Math.random() * 50) - 25
+
+                        }));
+
+                    }
+
+                }
+
+            }
+
+
+            d = this.p.a - this.t.a;
+
+            this.p.a = Math.max(0.1, this.p.a - (d * 0.05));
+
+            d = this.p.z - this.t.z;
+
+            this.p.z = Math.max(1, this.p.z - (d * 0.05));
+
+        },
+
+        distanceTo: function (n, details) {
+
+            var dx = this.p.x - n.x,
+
+                dy = this.p.y - n.y,
+
+                d = Math.sqrt(dx * dx + dy * dy);
+
+
+            return details ? [dx, dy, d] : d;
+
+        },
+
+        move: function (p, avoidStatic) {
+
+            if (!avoidStatic || (avoidStatic && this.distanceTo(p) > 1)) {
+
+                this.q.push(p);
+
+            }
+
+        },
+
+        render: function () {
+
+            this._update();
+
+            this._draw();
+
+        }
+
+    };
+
+
+    S.ShapeBuilder = (function () {
+
+        var gap = 13,
+
+            shapeCanvas = document.createElement('canvas'),
+
+            shapeContext = shapeCanvas.getContext('2d'),
+
+            fontSize = 500,
+
+            fontFamily = 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
+
+
+        function fit() {
+
+            shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
+
+            shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
+
+            shapeContext.fillStyle = 'red';
+
+            shapeContext.textBaseline = 'middle';
+
+            shapeContext.textAlign = 'center';
+
+        }
+
+
+        function processCanvas() {
+
+            var pixels = shapeContext.getImageData(0, 0, shapeCanvas.width, shapeCanvas.height).data;
+
+            dots = [],
+
+                pixels,
+
+                x = 0,
+
+                y = 0,
+
+                fx = shapeCanvas.width,
+
+                fy = shapeCanvas.height,
+
+                w = 0,
+
+                h = 0;
+
+
+            for (var p = 0; p < pixels.length; p += (4 * gap)) {
+
+                if (pixels[p + 3] > 0) {
+
+                    dots.push(new S.Point({
+
+                        x: x,
+
+                        y: y
+
+                    }));
+
+
+                    w = x > w ? x : w;
+
+                    h = y > h ? y : h;
+
+                    fx = x < fx ? x : fx;
+
+                    fy = y < fy ? y : fy;
+
+                }
+
+
+                x += gap;
+
+
+                if (x >= shapeCanvas.width) {
+
+                    x = 0;
+
+                    y += gap;
+
+                    p += gap * 4 * shapeCanvas.width;
+
+                }
+
+            }
+
+
+            return {dots: dots, w: w + fx, h: h + fy};
+
+        }
+
+
+        function setFontSize(s) {
+
+            shapeContext.font = 'bold ' + s + 'px ' + fontFamily;
+
+        }
+
+
+        function isNumber(n) {
+
+            return !isNaN(parseFloat(n)) && isFinite(n);
+
+        }
+
+
+        function init() {
+
+            fit();
+
+            window.addEventListener('resize', fit);
+
+        }
+
+
+        // Init
+
+        init();
+
+
+        return {
+
+            imageFile: function (url, callback) {
+
+                var image = new Image(),
+
+                    a = S.Drawing.getArea();
+
+
+                image.onload = function () {
+
+                    shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+
+                    shapeContext.drawImage(this, 0, 0, a.h * 0.6, a.h * 0.6);
+
+                    callback(processCanvas());
+
+                };
+
+
+                image.onerror = function () {
+
+                    callback(S.ShapeBuilder.letter('What?'));
+
+                };
+
+
+                image.src = url;
+
+            },
+
+            circle: function (d) {
+
+                var r = Math.max(0, d) / 2;
+
+                shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+
+                shapeContext.beginPath();
+
+                shapeContext.arc(r * gap, r * gap, r * gap, 0, 2 * Math.PI, false);
+
+                shapeContext.fill();
+
+                shapeContext.closePath();
+
+
+                return processCanvas();
+
+            },
+
+            letter: function (l) {
+
+                var s = 0;
+
+
+                setFontSize(fontSize);
+
+                s = Math.min(fontSize,
+
+                    (shapeCanvas.width / shapeContext.measureText(l).width) * 0.8 * fontSize,
+
+                    (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
+
+                setFontSize(s);
+
+
+                shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+
+                shapeContext.fillText(l, shapeCanvas.width / 2, shapeCanvas.height / 2);
+
+
+                return processCanvas();
+
+            },
+
+            rectangle: function (w, h) {
+
+                var dots = [],
+
+                    width = gap * w,
+
+                    height = gap * h;
+
+
+                for (var y = 0; y < height; y += gap) {
+
+                    for (var x = 0; x < width; x += gap) {
+
+                        dots.push(new S.Point({
+
+                            x: x,
+
+                            y: y
+
+                        }));
+
+                    }
+
+                }
+
+
+                return {dots: dots, w: width, h: height};
+
+            }
+
+        };
+
+    }());
+
+
+    S.Shape = (function () {
+
+        var dots = [],
+
+            width = 0,
+
+            height = 0,
+
+            cx = 0,
+
+            cy = 0;
+
+
+        function compensate() {
+
+            var a = S.Drawing.getArea();
+
+
+            cx = a.w / 2 - width / 2;
+
+            cy = a.h / 2 - height / 2;
+
+        }
+
+
+        return {
+
+            shuffleIdle: function () {
+
+                var a = S.Drawing.getArea();
+
+
+                for (var d = 0; d < dots.length; d++) {
+
+                    if (!dots[d].s) {
+
+                        dots[d].move({
+
+                            x: Math.random() * a.w,
+
+                            y: Math.random() * a.h
+
+                        });
+
+                    }
+
+                }
+
+            },
+
+            switchShape: function (n, fast) {
+
+                var size,
+
+                    a = S.Drawing.getArea();
+
+
+                width = n.w;
+
+                height = n.h;
+
+
+                compensate();
+
+
+                if (n.dots.length > dots.length) {
+
+                    size = n.dots.length - dots.length;
+
+                    for (var d = 1; d <= size; d++) {
+
+                        dots.push(new S.Dot(a.w / 2, a.h / 2));
+
+                    }
+
+                }
+
+
+                var d = 0,
+
+                    i = 0;
+
+
+                while (n.dots.length > 0) {
+
+                    i = Math.floor(Math.random() * n.dots.length);
+
+                    dots[d].e = fast ? 0.25 : (dots[d].s ? 0.14 : 0.11);
+
+
+                    if (dots[d].s) {
+
+                        dots[d].move(new S.Point({
+
+                            z: Math.random() * 20 + 10,
+
+                            a: Math.random(),
+
+                            h: 18
+
+                        }));
+
+                    } else {
+
+                        dots[d].move(new S.Point({
+
+                            z: Math.random() * 5 + 5,
+
+                            h: fast ? 18 : 30
+
+                        }));
+
+                    }
+
+
+                    dots[d].s = true;
+
+                    dots[d].move(new S.Point({
+
+                        x: n.dots[i].x + cx,
+
+                        y: n.dots[i].y + cy,
+
+                        a: 1,
+
+                        z: 5,
+
+                        h: 0
+
+                    }));
+
+
+                    n.dots = n.dots.slice(0, i).concat(n.dots.slice(i + 1));
+
+                    d++;
+
+                }
+
+
+                for (var i = d; i < dots.length; i++) {
+
+                    if (dots[i].s) {
+
+                        dots[i].move(new S.Point({
+
+                            z: Math.random() * 20 + 10,
+
+                            a: Math.random(),
+
+                            h: 20
+
+                        }));
+
+
+                        dots[i].s = false;
+
+                        dots[i].e = 0.04;
+
+                        dots[i].move(new S.Point({
+
+                            x: Math.random() * a.w,
+
+                            y: Math.random() * a.h,
+
+                            a: 0.3, //.4
+
+                            z: Math.random() * 4,
+
+                            h: 0
+
+                        }));
+
+                    }
+
+                }
+
+            },
+
+            render: function () {
+
+                for (var d = 0; d < dots.length; d++) {
+
+                    dots[d].render();
+
+                }
+
+            }
+
+        };
+
+    }());
+	
+	S.init();
+	
+
+</script>
+
+
+<script>
+	setTimeout(()=>{
+	  let Text = document.querySelector('textPath')
+	  Text.innerHTML = '.... No matter when and where, I hope you are carefree and happy ....'
+      let rid = null; // request animation id
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      const pathlength = shape.getTotalLength();
+
+      let t = 0; // at the begining of the path
+      let lengthAtT = pathlength * t;
+
+      let d = shape.getAttribute("d");
+
+      // 1. build the d array
+      let n = d.match(/C/gi).length; // how many times
+
+      let pos = 0; // the position, used to find the indexOf the nth C
+
+      class subPath {
+        constructor(d) {
+          this.d = d;
+          this.get_PointsRy();
+          this.previous = subpaths.length > 0 ? subpaths[subpaths.length - 1] : null;
+          this.measurePath();
+          this.get_M_Point(); //lastPoint
+          this.lastCubicBezier;
+          this.get_lastCubicBezier();
+        }
+
+        get_PointsRy() {
+          this.pointsRy = [];
+          let temp = this.d.split(/[A-Z,a-z\s,]/).filter(v => v); // remove empty elements
+          temp.map(item => {
+            this.pointsRy.push(parseFloat(item));
+          }); //this.pointsRy numbers not strings
+        }
+
+        measurePath() {
+          let path = document.createElementNS(SVG_NS, "path");
+          path.setAttributeNS(null, "d", this.d);
+          // no need to append it to the SVG
+          // the lengths of every path in dry
+          this.pathLength = path.getTotalLength();
+        }
+
+        get_M_Point() {
+          if (this.previous) {
+            let p = this.previous.pointsRy;
+            let l = p.length;
+            this.M_point = [p[l - 2], p[l - 1]];
+          } else {
+            let p = this.pointsRy;
+            this.M_point = [p[0], p[1]];
+          }
+        }
+
+        get_lastCubicBezier() {
+          let lastIndexOfC = this.d.lastIndexOf("C");
+          let temp = this.d
+            .substring(lastIndexOfC + 1)
+            .split(/[\s,]/)
+            .filter(v => v);
+          let _temp = [];
+          temp.map(item => {
+            _temp.push(parseFloat(item));
+          });
+          this.lastCubicBezier = [this.M_point];
+          for (let i = 0; i < _temp.length; i += 2) {
+            this.lastCubicBezier.push(_temp.slice(i, i + 2));
+          }
+        }
+      }
+
+      let subpaths = [];
+
+      // create new subPaths
+      for (let i = 0; i < n; i++) {
+        // finds the of nth C in d
+        let newpos = d.indexOf("C", pos + 1);
+        if (i > 0) {
+          // if it's not the first C
+          let sPath = new subPath(d.substring(0, newpos));
+          subpaths.push(sPath);
+        }
+        //change the value of the position pos
+        pos = newpos;
+      }
+      // at the end add d to the subpaths array
+      subpaths.push(new subPath(d));
+
+      // 2. get the index of the bezierLengths where the point at t is
+      let index;
+      for (index = 0; index < subpaths.length; index++) {
+        if (subpaths[index].pathLength >= lengthAtT) {
+          break;
+        }
+      }
+
+      function get_T(t, index) {
+        let T;
+        lengthAtT = pathlength * t;
+        if (index > 0) {
+          T =
+            (lengthAtT - subpaths[index].previous.pathLength) /
+            (subpaths[index].pathLength - subpaths[index].previous.pathLength);
+        } else {
+          T = lengthAtT / subpaths[index].pathLength;
+        }
+        //console.log(T)
+        return T;
+      }
+
+      let T = get_T(t, index);
+
+      let newPoints = getBezierPoints(T, subpaths[index].lastCubicBezier);
+
+      drawCBezier(newPoints, partialPath, index);
+
+      function getBezierPoints(t, points) {
+        let helperPoints = [];
+
+        // helper points 0,1,2
+        for (let i = 1; i < 4; i++) {
+          //points.length must be 4 !!!
+          let p = lerp(points[i - 1], points[i], t);
+          helperPoints.push(p);
+        }
+
+        // helper points 3,4
+        helperPoints.push(lerp(helperPoints[0], helperPoints[1], t));
+        helperPoints.push(lerp(helperPoints[1], helperPoints[2], t));
+
+        // helper point 5 is where the first Bézier ends and where the second Bézier begins
+        helperPoints.push(lerp(helperPoints[3], helperPoints[4], t));
+
+        // points for the dynamic bézier
+        let firstBezier = [
+          points[0],
+          helperPoints[0],
+          helperPoints[3],
+          helperPoints[5]
+        ];
+        return firstBezier;
+      }
+
+      function lerp(A, B, t) {
+        let ry = [
+          (B[0] - A[0]) * t + A[0], //x
+          (B[1] - A[1]) * t + A[1] //y
+        ];
+        return ry;
+      }
+
+      function drawCBezier(points, path, index) {
+        let d;
+
+        if (index > 0) {
+          d = subpaths[index].previous.d;
+        } else {
+          d = `M${points[0][0]},${points[0][1]} C`;
+        }
+
+        // points.length == 4
+        for (let i = 1; i < 4; i++) {
+          d += ` ${points[i][0]},${points[i][1]} `;
+        }
+        //console.log(d)
+        partialPath.setAttributeNS(null, "d", d);
+      }
+
+      t = 0.025;
+      function Typing() {
+        rid = window.requestAnimationFrame(Typing);
+        if (t >= 1) {
+          window.cancelAnimationFrame(rid);
+          rid = null;
+        } else {
+          t += 0.0025;
+        }
+
+        lengthAtT = pathlength * t;
+        for (index = 0; index < subpaths.length; index++) {
+          if (subpaths[index].pathLength >= lengthAtT) {
+            break;
+          }
+        }
+        T = get_T(t, index);
+        newPoints = getBezierPoints(T, subpaths[index].lastCubicBezier);
+        drawCBezier(newPoints, partialPath, index);
+      }
+
+      Typing();
+      theSvg.addEventListener("click", () => {
+        if (rid) {
+          window.cancelAnimationFrame(rid);
+          rid = null;
+        } else {
+          if (t >= 1) {
+            t = 0.025;
+          }
+          rid = window.requestAnimationFrame(Typing);
+        }
+      });
+
+      cb.addEventListener("input", () => {
+        if (cb.checked) {
+          useThePath.style.display = "block";
+        } else {
+          useThePath.style.display = "none";
+        }
+      });
+    },16000)
+</script>
+
+</body>
+
+</html>
